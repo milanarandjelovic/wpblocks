@@ -62,3 +62,21 @@ function wpblocks_cgb_editor_assets() {
 
 // Hook: Editor assets.
 add_action( 'enqueue_block_editor_assets', 'wpblocks_cgb_editor_assets' );
+
+
+add_action( 'rest_api_init', function () {
+	register_rest_route( 'wpblocks/v2', '/wp_ctimelines/all', array(
+		'methods' => 'GET',
+		'callback' => 'handle_get_all',
+//		'permission_callback' => function () {
+//			return current_user_can( 'edit_others_posts' );
+//		}
+	) );
+} );
+
+function handle_get_all( $data ) {
+	global $wpdb;
+	$query = "SELECT id as value, name as label FROM `wp_ctimelines`";
+	$list = $wpdb->get_results($query);
+	return $list;
+}

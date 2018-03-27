@@ -38,3 +38,20 @@
     fill: white; }
   .wp-block-wpblocks-media-upload button.remove-image:hover {
     opacity: 1; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
+.wp-block-wpblocks-title span.title-line {
+  width: 55px;
+  height: 10px;
+  border-radius: 7.5px;
+  margin: 30px 0 0 0; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/

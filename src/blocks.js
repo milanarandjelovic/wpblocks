@@ -22,3 +22,6 @@ import './examples/10-media-upload';
 import './examples/11-url-input';
 import './examples/12-dynamic';
 import './examples/13-dynamic-alt';
+
+import './new/title';
+import './new/content-timeline';
