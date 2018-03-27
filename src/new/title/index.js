@@ -205,9 +205,9 @@ registerBlockType(
 		 */
 		save: ( props ) => {
 			return (
-				<div>
+				<div className={ getDefaultClassNames( props ) }>
 					<div
-						className={ getDefaultClassNames( props ) }
+						className='custom-title'
 						style={ getTitleCustomStyle( props ) }
 					>
 						{ props.attributes.title }
@@ -228,7 +228,6 @@ registerBlockType(
 const getDefaultClassNames = ( props ) => {
 	return classnames(
 		props.className,
-		'custom-title'
 	);
 };
 
@@ -246,7 +245,7 @@ const getTitleLine = ( props ) => {
 
 	return (
 		props.attributes.checkTitleLine === true ? (
-			<span className='title-line' style={ titleLineStyle }></span>
+			<div className='title-line' style={ titleLineStyle }></div>
 		) : null
 	);
 };

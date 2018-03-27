@@ -25,3 +25,4 @@ import './examples/13-dynamic-alt';
 
 import './new/title';
 import './new/content-timeline';
+import './new/animated-counter'

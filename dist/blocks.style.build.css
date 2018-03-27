@@ -176,11 +176,18 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
-.wp-block-wpblocks-title span.title-line {
+.wp-block-wpblocks-title .title-line {
   width: 55px;
   height: 10px;
   border-radius: 7.5px;
-  margin: 30px 0 0 0; }
+  margin: 30px 0 0 0;
+  display: block; }
+/**
+ * #.# Common SCSS
+ *
+ * Can include things like variables and mixins
+ * that are used across the project.
+*/
 /**
  * #.# Common SCSS
  *
