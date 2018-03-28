@@ -4,7 +4,7 @@
 const { __ } = wp.i18n;
 const { Component } = wp.element;
 const { InspectorControls, ColorPalette } = wp.blocks;
-const { PanelBody, TextControl, PanelColor, ToggleControl, SelectControl } = wp.components;
+const { PanelBody, TextControl, PanelColor, SelectControl } = wp.components;
 
 /**
  * Create Inspector Control wrapper component
@@ -15,11 +15,11 @@ export default class Inspector extends Component {
 	 *
 	 * @param props
 	 */
-	constructor ( props ) {
+	constructor( props ) {
 		super( ...arguments );
 	}
 
-	render () {
+	render() {
 		const {
 			onChangePreSuffixValue,
 			onChangeCounterValue,
@@ -35,7 +35,9 @@ export default class Inspector extends Component {
 			onChangeCounterSecondBackgroundColor,
 			onChangeToggleGradientIconValue,
 			onChangeIconColor,
-			onChangeIconSecondColor
+			onChangeIconSecondColor,
+			onChangeTextColor,
+			onChangeTextSecondColor
 		} = this.props;
 
 		const {
@@ -53,7 +55,9 @@ export default class Inspector extends Component {
 			counterBackgroundColor,
 			counterSecondBackgroundColor,
 			iconColor,
-			iconSecondColor
+			iconSecondColor,
+			textColor,
+			textSecondColor
 		} = this.props.attributes;
 
 		return [
@@ -156,8 +160,8 @@ export default class Inspector extends Component {
 						value={ iconDisplayValue }
 						options={
 							[
-								{ label: __( 'Yes' ), value: 'iconShow' },
-								{ label: __( 'No' ), value: 'iconHide' },
+								{ label: __( 'Yes' ), value: 'yes' },
+								{ label: __( 'No' ), value: 'no' },
 							]
 						}
 						onChange={ ( value ) => onChangeIconDisplayValue( value ) }
@@ -266,6 +270,28 @@ export default class Inspector extends Component {
 						</PanelColor>
 					) : null
 				}
+
+				<PanelColor
+					title={ __( 'Text color' ) }
+					colorValue={ textColor }
+					initialOpen={ false }
+				>
+					<ColorPalette
+						value={ iconSecondColor }
+						onChange={ onChangeTextColor }
+					/>
+				</PanelColor>
+
+				<PanelColor
+					title={ __( 'Second text color' ) }
+					colorValue={ textSecondColor }
+					initialOpen={ false }
+				>
+					<ColorPalette
+						value={ iconSecondColor }
+						onChange={ onChangeTextSecondColor }
+					/>
+				</PanelColor>
 
 			</InspectorControls>
 		];

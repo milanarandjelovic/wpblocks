@@ -6,6 +6,9 @@ import './style.scss';
 import './editor.scss';
 import icon from './icon';
 
+require( './waypoint' );
+require( './jquery-counter' );
+
 import Inspector from './inspector';
 
 /**
@@ -76,7 +79,7 @@ registerBlockType(
 
 			iconDisplayValue: {
 				type: 'string',
-				default: 'iconHide'
+				default: 'no'
 			},
 
 			iconValue: {
@@ -90,10 +93,8 @@ registerBlockType(
 			},
 
 			showGradientIconValue: {
-				toggleGradientValue: {
-					type: 'string',
-					default: 'no'
-				},
+				type: 'string',
+				default: 'no'
 			},
 
 			counterBackgroundColor: {
@@ -114,6 +115,16 @@ registerBlockType(
 			iconSecondColor: {
 				type: 'string',
 				default: '#222'
+			},
+
+			textColor: {
+				type: 'string',
+				default: '#222'
+			},
+
+			textSecondColor: {
+				type: 'string',
+				default: '#222'
 			}
 		},
 
@@ -126,6 +137,26 @@ registerBlockType(
 		 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 		 */
 		edit: ( props ) => {
+
+			const {
+				counterValue,
+				preSuffixValue,
+				prefixValue,
+				suffixValue,
+				iconAlignmentValue,
+				textCounterValue,
+				textSizeValue,
+				iconDisplayValue,
+				iconValue,
+				toggleGradientValue,
+				showGradientIconValue,
+				counterBackgroundColor,
+				counterSecondBackgroundColor,
+				iconColor,
+				iconSecondColor,
+				textColor,
+				textSecondColor
+			} = props.attributes;
 
 			/**
 			 * Set counter value.
@@ -261,7 +292,33 @@ registerBlockType(
 				props.setAttributes( { iconSecondColor: value } );
 			};
 
-			console.log( props.attributes.showGradientIconValue );
+			/**
+			 * Set onChangeTextColor.
+			 *
+			 * @param value
+			 */
+			const onChangeTextColor = ( value ) => {
+				props.setAttributes( { textColor: value } );
+
+			};
+
+			/**
+			 * Set textSecondColor.
+			 *
+			 * @param value
+			 */
+			const onChangeTextSecondColor = ( value ) => {
+				props.setAttributes( { textSecondColor: value } );
+
+			};
+
+			const counterStyle = {
+				background: '-webkit-linear-gradient(left,' + counterBackgroundColor + ' , ' + counterSecondBackgroundColor + ')'
+			};
+
+			const prefixAndSuffixStyles = {
+				color: textColor
+			};
 
 			return [
 
@@ -283,12 +340,39 @@ registerBlockType(
 							onChangeToggleGradientIconValue,
 							onChangeIconColor,
 							onChangeIconSecondColor,
+							onChangeTextColor,
+							onChangeTextSecondColor,
 							...props
 						} }
 					/>
 				),
 
-				<div>ANIMATED COUNTER</div>
+				<div
+					className={ classnames( props.className, 'animated-countdown' ) }
+					style={ counterStyle }
+				>
+					{
+						iconDisplayValue === 'yes' ? (
+							<p className='counter-icon'>
+								<i className={ iconValue }></i>
+							</p>
+						) : null
+					}
+					<div style={ prefixAndSuffixStyles }>{ textCounterValue }</div>
+					{
+						preSuffixValue === 'prefix' || preSuffixValue === 'both' ? (
+							<div style={ prefixAndSuffixStyles }>{ prefixValue }</div>
+						) : null
+					}
+					<p className='countdown' data-to={ counterValue } data-easing="easeInOutCubic">
+						{ 0 }
+					</p>
+					{
+						preSuffixValue === 'suffix' || preSuffixValue === 'both' ? (
+							<div style={ prefixAndSuffixStyles }>{ suffixValue }</div>
+						) : null
+					}
+				</div>
 
 			];
 		},
@@ -302,8 +386,56 @@ registerBlockType(
 		 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 		 */
 		save: ( props ) => {
+
+			const {
+				counterValue,
+				preSuffixValue,
+				prefixValue,
+				suffixValue,
+				iconAlignmentValue,
+				textCounterValue,
+				textSizeValue,
+				iconDisplayValue,
+				iconValue,
+				toggleGradientValue,
+				showGradientIconValue,
+				counterBackgroundColor,
+				counterSecondBackgroundColor,
+				iconColor,
+				iconSecondColor,
+				textColor,
+				textSecondColor
+			} = props.attributes;
+
+			const prefixAndSuffixStyles = {
+				color: textColor
+			};
+
 			return (
-				<div>SAVE</div>
+				<div className={ classnames( props.className, 'animated-countdown' ) }>
+					{
+						iconDisplayValue === 'yes' ? (
+							<p className='counter-icon'>
+								<i className={ iconValue }></i>
+							</p>
+						) : null
+					}
+					<div style={ prefixAndSuffixStyles }>{ textCounterValue }</div>
+					{
+						preSuffixValue === 'prefix' || preSuffixValue === 'both' ? (
+							<div style={ prefixAndSuffixStyles }>{ prefixValue }</div>
+						) : null
+					}
+					<p className='countdown' data-to={ counterValue } data-easing="easeInOutCubic">
+						{ 0 }
+					</p>
+					{
+						preSuffixValue === 'suffix' || preSuffixValue === 'both' ? (
+							<div style={ prefixAndSuffixStyles }>{ suffixValue }</div>
+						) : null
+					}
+				</div>
+
 			);
 		},
 	}
