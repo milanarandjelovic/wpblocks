@@ -20,25 +20,7 @@ export default class Inspector extends Component {
 	}
 
 	render() {
-		const {
-			onChangePreSuffixValue,
-			onChangeCounterValue,
-			onChangePrefixValue,
-			onChangeSuffixValue,
-			onChangeIconAlignmentValue,
-			onChangeTextCounterValue,
-			onChangeTextSizeValue,
-			onChangeIconDisplayValue,
-			onChangeIconValue,
-			onChangeToggleGradientValue,
-			onChangeCounterBackgroundColor,
-			onChangeCounterSecondBackgroundColor,
-			onChangeToggleGradientIconValue,
-			onChangeIconColor,
-			onChangeIconSecondColor,
-			onChangeTextColor,
-			onChangeTextSecondColor
-		} = this.props;
+		const { handleChange } = this.props;
 
 		const {
 			counterValue,
@@ -51,7 +33,8 @@ export default class Inspector extends Component {
 			iconDisplayValue,
 			iconValue,
 			toggleGradientValue,
-			showGradientIconValue,
+			toggleGradientIconValue,
+			toggleGradientTextValue,
 			counterBackgroundColor,
 			counterSecondBackgroundColor,
 			iconColor,
@@ -72,7 +55,7 @@ export default class Inspector extends Component {
 						label={ __( 'Counter value' ) }
 						help={ __( 'Please enter your counter value.' ) }
 						value={ counterValue }
-						onChange={ ( value ) => onChangeCounterValue( value ) }
+						onChange={ ( value ) => handleChange( value, 'counterValue' ) }
 					/>
 
 					<SelectControl
@@ -87,7 +70,7 @@ export default class Inspector extends Component {
 								{ label: __( 'Both' ), value: 'both' },
 							]
 						}
-						onChange={ ( value ) => onChangePreSuffixValue( value ) }
+						onChange={ ( value ) => handleChange( value, 'preSuffixValue' ) }
 					/>
 
 					{
@@ -96,7 +79,7 @@ export default class Inspector extends Component {
 								label={ __( 'Prefix value' ) }
 								help={ __( 'Please enter your prefix.' ) }
 								value={ prefixValue }
-								onChange={ ( value ) => onChangePrefixValue( value ) }
+								onChange={ ( value ) => handleChange( value, 'prefixValue' ) }
 							/>
 						) : null
 					}
@@ -107,7 +90,7 @@ export default class Inspector extends Component {
 								label={ __( 'Suffix value' ) }
 								help={ __( 'Please enter your suffix.' ) }
 								value={ suffixValue }
-								onChange={ ( value ) => onChangeSuffixValue( value ) }
+								onChange={ ( value ) => handleChange( value, 'suffixValue' ) }
 							/>
 						) : null
 					}
@@ -118,19 +101,19 @@ export default class Inspector extends Component {
 						value={ iconAlignmentValue }
 						options={
 							[
-								{ label: __( 'Left' ), value: 'iconLeft' },
-								{ label: __( 'Center' ), value: 'iconCenter' },
-								{ label: __( 'Right' ), value: 'iconRight' },
+								{ label: __( 'Left' ), value: 'icon-left' },
+								{ label: __( 'Center' ), value: 'icon-center' },
+								{ label: __( 'Right' ), value: 'icon-right' },
 							]
 						}
-						onChange={ ( value ) => onChangeIconAlignmentValue( value ) }
+						onChange={ ( value ) => handleChange( value, 'iconAlignmentValue' ) }
 					/>
 
 					<TextControl
 						label={ __( 'Text for counter' ) }
 						help={ __( 'Please enter your text for counter.' ) }
 						value={ textCounterValue }
-						onChange={ ( value ) => onChangeTextCounterValue( value ) }
+						onChange={ ( value ) => handleChange( value, 'textCounterValue' ) }
 					/>
 
 					<SelectControl
@@ -139,12 +122,12 @@ export default class Inspector extends Component {
 						value={ textSizeValue }
 						options={
 							[
-								{ label: __( 'Medium' ), value: 'textMedium' },
-								{ label: __( 'Large' ), value: 'textLarge' },
-								{ label: __( 'Small' ), value: 'textSmall' },
+								{ label: __( 'Medium' ), value: 'text-medium' },
+								{ label: __( 'Large' ), value: 'text-large' },
+								{ label: __( 'Small' ), value: 'text-small' },
 							]
 						}
-						onChange={ ( value ) => onChangeTextSizeValue( value ) }
+						onChange={ ( value ) => handleChange( value, 'textSizeValue' ) }
 					/>
 
 				</PanelBody>
@@ -164,7 +147,7 @@ export default class Inspector extends Component {
 								{ label: __( 'No' ), value: 'no' },
 							]
 						}
-						onChange={ ( value ) => onChangeIconDisplayValue( value ) }
+						onChange={ ( value ) => handleChange( value, 'iconDisplayValue' ) }
 					/>
 
 					{
@@ -179,7 +162,7 @@ export default class Inspector extends Component {
 										{ label: __( 'No' ), value: 'iconNo' },
 									]
 								}
-								onChange={ ( value ) => onChangeIconValue( value ) }
+								onChange={ ( value ) => handleChange( value, 'iconValue' ) }
 							/>
 						) : null
 					}
@@ -201,20 +184,33 @@ export default class Inspector extends Component {
 								{ label: __( 'No' ), value: 'no' },
 							]
 						}
-						onChange={ ( value ) => onChangeToggleGradientValue( value ) }
+						onChange={ ( value ) => handleChange( value, 'toggleGradientValue' ) }
 					/>
 
 					<SelectControl
-						label={ __( 'Icon Gradient' ) }
-						help={ __( 'Choose if you want gradient for icon.' ) }
-						value={ showGradientIconValue }
+						label={ __( 'Text Gradient' ) }
+						help={ __( 'Choose if you want gradient for text.' ) }
+						value={ toggleGradientTextValue }
 						options={
 							[
 								{ label: __( 'Yes' ), value: 'yes' },
 								{ label: __( 'No' ), value: 'no' },
 							]
 						}
-						onChange={ ( value ) => onChangeToggleGradientIconValue( value ) }
+						onChange={ ( value ) => handleChange( value, 'toggleGradientTextValue' ) }
+					/>
+
+					<SelectControl
+						label={ __( 'Icon Gradient' ) }
+						help={ __( 'Choose if you want gradient for icon.' ) }
+						value={ toggleGradientIconValue }
+						options={
+							[
+								{ label: __( 'Yes' ), value: 'yes' },
+								{ label: __( 'No' ), value: 'no' },
+							]
+						}
+						onChange={ ( value ) => handleChange( value, 'toggleGradientIconValue' ) }
 					/>
 
 				</PanelBody>
@@ -226,18 +222,7 @@ export default class Inspector extends Component {
 				>
 					<ColorPalette
 						value={ counterBackgroundColor }
-						onChange={ onChangeCounterBackgroundColor }
-					/>
-				</PanelColor>
-
-				<PanelColor
-					title={ __( 'Icon Color' ) }
-					colorValue={ iconColor }
-					initialOpen={ false }
-				>
-					<ColorPalette
-						value={ iconColor }
-						onChange={ onChangeIconColor }
+						onChange={ ( value ) => handleChange( value, 'counterBackgroundColor' ) }
 					/>
 				</PanelColor>
 
@@ -250,14 +235,25 @@ export default class Inspector extends Component {
 						>
 							<ColorPalette
 								value={ counterSecondBackgroundColor }
-								onChange={ onChangeCounterSecondBackgroundColor }
+								onChange={ ( value ) => handleChange( value, 'counterSecondBackgroundColor' ) }
 							/>
 						</PanelColor>
 					) : null
 				}
 
+				<PanelColor
+					title={ __( 'Icon Color' ) }
+					colorValue={ iconColor }
+					initialOpen={ false }
+				>
+					<ColorPalette
+						value={ iconColor }
+						onChange={ ( value ) => handleChange( value, 'iconColor' ) }
+					/>
+				</PanelColor>
+
 				{
-					showGradientIconValue === 'yes' ? (
+					toggleGradientIconValue === 'yes' ? (
 						<PanelColor
 							title={ __( 'Second Icon Color' ) }
 							colorValue={ iconSecondColor }
@@ -265,7 +261,7 @@ export default class Inspector extends Component {
 						>
 							<ColorPalette
 								value={ iconSecondColor }
-								onChange={ onChangeIconSecondColor }
+								onChange={ ( value ) => handleChange( value, 'iconSecondColor' ) }
 							/>
 						</PanelColor>
 					) : null
@@ -277,21 +273,25 @@ export default class Inspector extends Component {
 					initialOpen={ false }
 				>
 					<ColorPalette
-						value={ iconSecondColor }
-						onChange={ onChangeTextColor }
+						value={ textColor }
+						onChange={ ( value ) => handleChange( value, 'textColor' ) }
 					/>
 				</PanelColor>
 
-				<PanelColor
-					title={ __( 'Second text color' ) }
-					colorValue={ textSecondColor }
-					initialOpen={ false }
-				>
-					<ColorPalette
-						value={ iconSecondColor }
-						onChange={ onChangeTextSecondColor }
-					/>
-				</PanelColor>
+				{
+					toggleGradientTextValue === 'yes' ? (
+						<PanelColor
+							title={ __( 'Second text color' ) }
+							colorValue={ textSecondColor }
+							initialOpen={ false }
+						>
+							<ColorPalette
+								value={ textSecondColor }
+								onChange={ ( value ) => handleChange( value, 'textSecondColor' ) }
+							/>
+						</PanelColor>
+					) : null
+				}
 
 			</InspectorControls>
 		];

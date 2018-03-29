@@ -1,0 +1,104 @@
+.wp-block-wpblocks-animated-counter .animated-countdown {
+  display: block;
+
+  &.text-small {
+	.countdown {
+	  font-size: 36px;
+	  line-height: 36px;
+	}
+
+	span {
+	  font-size: 36px;
+	  line-height: 36px;
+	}
+
+	.counter-icon {
+	  font-size: 24px;
+	}
+  }
+
+  &.text-large {
+	.countdown {
+	  font-size: 60px;
+	  line-height: 60px;
+	}
+
+	span {
+	  font-size: 60px;
+	  line-height: 60px;
+	}
+
+	.counter-icon {
+	  font-size: 60px;
+	}
+  }
+
+  &.text-medium {
+	.counter-icon {
+	  font-size: 48px;
+	}
+
+	.countdown {
+	  font-size: 48px;
+	  line-height: 48px
+	}
+
+	span {
+	  font-size: 48px;
+	  line-height: 48px
+	}
+  }
+
+  &.icon-left {
+	text-align: left;
+
+	.counter-text {
+	  text-align: left;
+	}
+
+	.counter-icon {
+	  text-align: left;
+	}
+  }
+
+  &.icon-center {
+	text-align: center;
+  }
+
+  &.icon-right {
+	text-align: right;
+
+	.counter-icon {
+	  text-align: right;
+	}
+
+	.counter-text {
+	  text-align: right;
+	}
+  }
+
+  p,
+  h4 {
+	text-align: center;
+
+	&.counter-icon {
+	  margin: 0;
+	  line-height: 1.4;
+	}
+
+	&.counter-text {
+	  margin: 15px 0;
+	}
+
+	&.countdown {
+	  font-weight: 300;
+	  margin-bottom: 0;
+	  display: inline-block;
+	}
+  }
+
+  span {
+	font-weight: 300;
+	margin-bottom: 0;
+  }
+}

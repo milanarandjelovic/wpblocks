@@ -62,3 +62,61 @@
  * Can include things like variables and mixins
  * that are used across the project.
 */
+.wp-block-wpblocks-animated-counter .animated-countdown {
+  display: block; }
+  .wp-block-wpblocks-animated-counter .animated-countdown.text-small .countdown {
+    font-size: 36px;
+    line-height: 36px; }
+  .wp-block-wpblocks-animated-counter .animated-countdown.text-small span {
+    font-size: 36px;
+    line-height: 36px; }
+  .wp-block-wpblocks-animated-counter .animated-countdown.text-small .counter-icon {
+    font-size: 24px; }
+  .wp-block-wpblocks-animated-counter .animated-countdown.text-large .countdown {
+    font-size: 60px;
+    line-height: 60px; }
+  .wp-block-wpblocks-animated-counter .animated-countdown.text-large span {
+    font-size: 60px;
+    line-height: 60px; }
+  .wp-block-wpblocks-animated-counter .animated-countdown.text-large .counter-icon {
+    font-size: 60px; }
+  .wp-block-wpblocks-animated-counter .animated-countdown.text-medium .counter-icon {
+    font-size: 48px; }
+  .wp-block-wpblocks-animated-counter .animated-countdown.text-medium .countdown {
+    font-size: 48px;
+    line-height: 48px; }
+  .wp-block-wpblocks-animated-counter .animated-countdown.text-medium span {
+    font-size: 48px;
+    line-height: 48px; }
+  .wp-block-wpblocks-animated-counter .animated-countdown.icon-left {
+    text-align: left; }
+    .wp-block-wpblocks-animated-counter .animated-countdown.icon-left .counter-text {
+      text-align: left; }
+    .wp-block-wpblocks-animated-counter .animated-countdown.icon-left .counter-icon {
+      text-align: left; }
+  .wp-block-wpblocks-animated-counter .animated-countdown.icon-center {
+    text-align: center; }
+  .wp-block-wpblocks-animated-counter .animated-countdown.icon-right {
+    text-align: right; }
+    .wp-block-wpblocks-animated-counter .animated-countdown.icon-right .counter-icon {
+      text-align: right; }
+    .wp-block-wpblocks-animated-counter .animated-countdown.icon-right .counter-text {
+      text-align: right; }
+  .wp-block-wpblocks-animated-counter .animated-countdown p,
+  .wp-block-wpblocks-animated-counter .animated-countdown h4 {
+    text-align: center; }
+    .wp-block-wpblocks-animated-counter .animated-countdown p.counter-icon,
+    .wp-block-wpblocks-animated-counter .animated-countdown h4.counter-icon {
+      margin: 0;
+      line-height: 1.4; }
+    .wp-block-wpblocks-animated-counter .animated-countdown p.counter-text,
+    .wp-block-wpblocks-animated-counter .animated-countdown h4.counter-text {
+      margin: 15px 0; }
+    .wp-block-wpblocks-animated-counter .animated-countdown p.countdown,
+    .wp-block-wpblocks-animated-counter .animated-countdown h4.countdown {
+      font-weight: 300;
+      margin-bottom: 0;
+      display: inline-block; }
+  .wp-block-wpblocks-animated-counter .animated-countdown span {
+    font-weight: 300;
+    margin-bottom: 0; }

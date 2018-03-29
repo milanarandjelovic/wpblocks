@@ -1,7 +1,6 @@
 /**
  * Block dependencies
  */
-import classnames from 'classnames';
 import './style.scss';
 import './editor.scss';
 import icon from './icon';
@@ -10,6 +9,7 @@ require( './waypoint' );
 require( './jquery-counter' );
 
 import Inspector from './inspector';
+import AnimatedCounter from './animated-counter'
 
 /**
  * Internal block libraries
@@ -92,7 +92,12 @@ registerBlockType(
 				default: 'no'
 			},
 
-			showGradientIconValue: {
+			toggleGradientIconValue: {
+				type: 'string',
+				default: 'no'
+			},
+
+			toggleGradientTextValue: {
 				type: 'string',
 				default: 'no'
 			},
@@ -137,242 +142,23 @@ registerBlockType(
 		 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 		 */
 		edit: ( props ) => {
-
-			const {
-				counterValue,
-				preSuffixValue,
-				prefixValue,
-				suffixValue,
-				iconAlignmentValue,
-				textCounterValue,
-				textSizeValue,
-				iconDisplayValue,
-				iconValue,
-				toggleGradientValue,
-				showGradientIconValue,
-				counterBackgroundColor,
-				counterSecondBackgroundColor,
-				iconColor,
-				iconSecondColor,
-				textColor,
-				textSecondColor
-			} = props.attributes;
-
 			/**
-			 * Set counter value.
+			 * Set current attribute.
 			 *
 			 * @param value
+			 * @param attribute
 			 */
-			const onChangeCounterValue = ( value ) => {
-				props.setAttributes( { counterValue: value } );
-			};
-
-			/**
-			 * Set preSuffixValue.
-			 *
-			 * @param value
-			 */
-			const onChangePreSuffixValue = ( value ) => {
-				props.setAttributes( { preSuffixValue: value } );
-			};
-
-			/**
-			 * Set prefixValue.
-			 *
-			 * @param value
-			 */
-			const onChangePrefixValue = ( value ) => {
-				props.setAttributes( { prefixValue: value } );
-			};
-
-			/**
-			 * Set suffixValue.
-			 *
-			 * @param value
-			 */
-			const onChangeSuffixValue = ( value ) => {
-				props.setAttributes( { suffixValue: value } );
-			};
-
-			/**
-			 * Set iconAlignmentValue.
-			 *
-			 * @param value
-			 */
-			const onChangeIconAlignmentValue = ( value ) => {
-				props.setAttributes( { iconAlignmentValue: value } );
-			};
-
-			/**
-			 * Set textCounterValue.
-			 *
-			 * @param value
-			 */
-			const onChangeTextCounterValue = ( value ) => {
-				props.setAttributes( { textCounterValue: value } );
-			};
-
-			/**
-			 * Set textSizeValue.
-			 *
-			 * @param value
-			 */
-			const onChangeTextSizeValue = ( value ) => {
-				props.setAttributes( { textSizeValue: value } );
-			};
-
-			/**
-			 * Set iconDisplayValue.
-			 *
-			 * @param value
-			 */
-			const onChangeIconDisplayValue = ( value ) => {
-				props.setAttributes( { iconDisplayValue: value } );
-			};
-
-			/**
-			 * Set iconValue.
-			 *
-			 * @param value
-			 */
-			const onChangeIconValue = ( value ) => {
-				props.setAttributes( { iconValue: value } );
-			};
-
-			/**
-			 * Set toggleGradientValue.
-			 *
-			 * @param value
-			 */
-			const onChangeToggleGradientValue = ( value ) => {
-				props.setAttributes( { toggleGradientValue: value } );
-			};
-
-			/**
-			 * Set counterBackgroundColor.
-			 * @param value
-			 */
-			const onChangeCounterBackgroundColor = ( value ) => {
-				props.setAttributes( { counterBackgroundColor: value } );
-			};
-
-			/**
-			 * Set counterSecondBackgroundColor.
-			 *
-			 * @param value
-			 */
-			const onChangeCounterSecondBackgroundColor = ( value ) => {
-				props.setAttributes( { counterSecondBackgroundColor: value } );
-			};
-
-			/**
-			 * Set showGradientIconValue.
-			 *
-			 * @param value
-			 */
-			const onChangeToggleGradientIconValue = ( value ) => {
-				props.setAttributes( { showGradientIconValue: value } );
-			};
-
-			/**
-			 * Set iconColor.
-			 *
-			 * @param value
-			 */
-			const onChangeIconColor = ( value ) => {
-				props.setAttributes( { iconColor: value } );
-			};
-
-			/**
-			 * Set iconSecondColor.
-			 *
-			 * @param value
-			 */
-			const onChangeIconSecondColor = ( value ) => {
-				props.setAttributes( { iconSecondColor: value } );
-			};
-
-			/**
-			 * Set onChangeTextColor.
-			 *
-			 * @param value
-			 */
-			const onChangeTextColor = ( value ) => {
-				props.setAttributes( { textColor: value } );
-
-			};
-
-			/**
-			 * Set textSecondColor.
-			 *
-			 * @param value
-			 */
-			const onChangeTextSecondColor = ( value ) => {
-				props.setAttributes( { textSecondColor: value } );
-
-			};
-
-			const counterStyle = {
-				background: '-webkit-linear-gradient(left,' + counterBackgroundColor + ' , ' + counterSecondBackgroundColor + ')'
-			};
-
-			const prefixAndSuffixStyles = {
-				color: textColor
+			const handleChange = ( value, attribute ) => {
+				props.setAttributes( { [attribute]: value } );
 			};
 
 			return [
 
 				!!props.focus && (
-					<Inspector
-						{ ...{
-							onChangeCounterValue,
-							onChangePreSuffixValue,
-							onChangePrefixValue,
-							onChangeSuffixValue,
-							onChangeIconAlignmentValue,
-							onChangeTextCounterValue,
-							onChangeTextSizeValue,
-							onChangeIconDisplayValue,
-							onChangeIconValue,
-							onChangeToggleGradientValue,
-							onChangeCounterBackgroundColor,
-							onChangeCounterSecondBackgroundColor,
-							onChangeToggleGradientIconValue,
-							onChangeIconColor,
-							onChangeIconSecondColor,
-							onChangeTextColor,
-							onChangeTextSecondColor,
-							...props
-						} }
-					/>
+					<Inspector{ ...{ handleChange, ...props } }/>
 				),
 
-				<div
-					className={ classnames( props.className, 'animated-countdown' ) }
-					style={ counterStyle }
-				>
-					{
-						iconDisplayValue === 'yes' ? (
-							<p className='counter-icon'>
-								<i className={ iconValue }></i>
-							</p>
-						) : null
-					}
-					<div style={ prefixAndSuffixStyles }>{ textCounterValue }</div>
-					{
-						preSuffixValue === 'prefix' || preSuffixValue === 'both' ? (
-							<div style={ prefixAndSuffixStyles }>{ prefixValue }</div>
-						) : null
-					}
-					<p className='countdown' data-to={ counterValue } data-easing="easeInOutCubic">
-						{ 0 }
-					</p>
-					{
-						preSuffixValue === 'suffix' || preSuffixValue === 'both' ? (
-							<div style={ prefixAndSuffixStyles }>{ suffixValue }</div>
-						) : null
-					}
-				</div>
+				<AnimatedCounter { ...props }/>
 
 			];
 		},
@@ -386,56 +172,8 @@ registerBlockType(
 		 * @link https://wordpress.org/gutenberg/handbook/block-api/block-edit-save/
 		 */
 		save: ( props ) => {
-
-			const {
-				counterValue,
-				preSuffixValue,
-				prefixValue,
-				suffixValue,
-				iconAlignmentValue,
-				textCounterValue,
-				textSizeValue,
-				iconDisplayValue,
-				iconValue,
-				toggleGradientValue,
-				showGradientIconValue,
-				counterBackgroundColor,
-				counterSecondBackgroundColor,
-				iconColor,
-				iconSecondColor,
-				textColor,
-				textSecondColor
-			} = props.attributes;
-
-			const prefixAndSuffixStyles = {
-				color: textColor
-			};
-
 			return (
-				<div className={ classnames( props.className, 'animated-countdown' ) }>
-					{
-						iconDisplayValue === 'yes' ? (
-							<p className='counter-icon'>
-								<i className={ iconValue }></i>
-							</p>
-						) : null
-					}
-					<div style={ prefixAndSuffixStyles }>{ textCounterValue }</div>
-					{
-						preSuffixValue === 'prefix' || preSuffixValue === 'both' ? (
-							<div style={ prefixAndSuffixStyles }>{ prefixValue }</div>
-						) : null
-					}
-					<p className='countdown' data-to={ counterValue } data-easing="easeInOutCubic">
-						{ 0 }
-					</p>
-					{
-						preSuffixValue === 'suffix' || preSuffixValue === 'both' ? (
-							<div style={ prefixAndSuffixStyles }>{ suffixValue }</div>
-						) : null
-					}
-				</div>
-
+				<AnimatedCounter { ...props }/>
 			);
 		},
 	}
